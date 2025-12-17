@@ -7,6 +7,10 @@ export const metadata: Metadata = {
   title: "Adamfopa Outpatient Psychiatry, PLLC",
   description:
     "Outpatient psychiatric care with telehealth and in-person visits. Request an appointment online.",
+  icons: {
+    icon: "/favicon.svg",
+    shortcut: "/favicon.svg",
+  },
 };
 
 export default function RootLayout({

@@ -20,7 +20,7 @@ export default function ProviderPreview() {
             alt="Provider portrait."
             width={720}
             height={900}
-            className="h-[360px] w-full object-cover md:h-[480px]"
+            className="h-[420px] w-full object-cover object-[50%_20%] md:h-[520px] lg:h-[560px]"
           />
           <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-950/55 via-slate-950/20 to-transparent p-5">
             <div className="flex flex-wrap items-center gap-2 text-xs font-semibold text-white">
