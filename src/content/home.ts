@@ -1,5 +1,5 @@
 export const heroContent = {
-  overline: "Adamfopa Outpatient Psychiatry, PLLC",
+  overline: "Adamfopa Psychiatry, PLLC",
   title: "Private Outpatient Psychiatry Care",
   subtitle:
     "Telehealth and in-person visits with a collaborative, patient-first approach. Together we’ll design a plan that fits your goals and pace.",
