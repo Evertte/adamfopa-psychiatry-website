@@ -1,0 +1,81 @@
+import ContactForm from "./ContactForm";
+
+export default async function ContactPage({
+  searchParams,
+}: {
+  searchParams?: Promise<{ [key: string]: string | string[] | undefined }>;
+}) {
+  const params = await searchParams;
+  const visitParam = typeof params?.visit === "string" ? params.visit : "";
+  const defaultVisit =
+    visitParam === "telehealth"
+      ? "telehealth"
+      : visitParam === "inperson"
+        ? "inperson"
+        : "";
+  const mapSrc =
+    "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2948.812316774817!2d-71.75979422371341!3d42.52509082634845!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89e3e6d9f406edb9%3A0x6138be05c3aab778!2sLeominster%2C%20MA!5e0!3m2!1sen!2sus!4v1700000000000!5m2!1sen!2sus";
+
+  return (
+    <main className="min-h-screen bg-slate-50 text-slate-900">
+      <section className="bg-white/70">
+        <div className="mx-auto max-w-5xl px-6 py-12 md:py-16">
+          <div className="space-y-3">
+            <p className="text-xs font-semibold uppercase tracking-wide text-teal-700">
+              Request an appointment
+            </p>
+            <h1 className="text-3xl font-semibold md:text-4xl">
+              Contact Adamfopa Psychiatry
+            </h1>
+            <p className="max-w-3xl text-base text-slate-600">
+              Telehealth and in-person options. Average response is typically within one business day.
+            </p>
+          </div>
+
+          <div className="mt-6 flex flex-wrap gap-2 text-xs font-semibold text-slate-700">
+            <span className="rounded-full bg-slate-100 px-3 py-1 ring-1 ring-slate-200">
+              Secure form
+            </span>
+            <span className="rounded-full bg-slate-100 px-3 py-1 ring-1 ring-slate-200">
+              Licensed in MA &amp; NH
+            </span>
+            <span className="rounded-full bg-slate-100 px-3 py-1 ring-1 ring-slate-200">
+              Telehealth instructions provided after scheduling
+            </span>
+          </div>
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-5xl px-6 pb-14">
+        <div className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+          <ContactForm defaultVisit={defaultVisit} />
+        </div>
+
+        <p className="mt-4 text-xs text-slate-500">
+          Please do not include sensitive medical details in this form. This website form is not for emergencies. If you are in crisis, call 911 or go to the nearest emergency room.
+        </p>
+
+        <div className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+          <p className="text-sm font-semibold text-slate-900">
+            Office location (in-person visits)
+          </p>
+          <p className="mt-1 text-sm text-slate-600">
+            Leominster, MA. Exact details are provided after scheduling.
+          </p>
+          <div className="mt-4 overflow-hidden rounded-xl border border-slate-200">
+            <iframe
+              title="Leominster office map"
+              src={mapSrc}
+              width="100%"
+              height="320"
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              style={{ border: 0 }}
+              allowFullScreen
+            />
+          </div>
+        </div>
+      </section>
+    </main>
+  );
+}
