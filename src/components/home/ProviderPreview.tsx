@@ -16,13 +16,13 @@ export default function ProviderPreview() {
       <div className="grid gap-6 rounded-3xl bg-slate-50 p-6 md:grid-cols-[1fr_1.1fr] md:items-center md:p-10">
         <div className="relative overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm">
           <Image
-            src="/provider.jpg"
+            src="/adamfopa.png"
             alt="Provider portrait."
             width={720}
             height={900}
-            className="h-full w-full object-cover"
+            className="h-[360px] w-full object-cover md:h-[480px]"
           />
-          <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-950/65 via-slate-950/25 to-transparent p-5">
+          <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-950/55 via-slate-950/20 to-transparent p-5">
             <div className="flex flex-wrap items-center gap-2 text-xs font-semibold text-white">
               <span className="rounded-full bg-white/20 px-3 py-1 ring-1 ring-white/25">
                 Telehealth &amp; in-person
