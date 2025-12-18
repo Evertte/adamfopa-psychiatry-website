@@ -129,7 +129,6 @@ export default function AboutPage() {
               <EmailLink
                 email="adamfopapsychiatry@gmail.com"
                 label="Email for a free 15-minute consult"
-                copyLabel="Copy email"
               />
             </div>
 
