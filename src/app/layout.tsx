@@ -11,6 +11,23 @@ export const metadata: Metadata = {
     icon: "/favicon.svg",
     shortcut: "/favicon.svg",
   },
+  openGraph: {
+    title: "Adamfopa Outpatient Psychiatry, PLLC",
+    description:
+      "Outpatient psychiatric care with telehealth and in-person visits. Request an appointment online.",
+    images: [
+      {
+        url: "/adamfopa.png",
+        width: 1200,
+        height: 630,
+        alt: "Adamfopa Psychiatry",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    images: ["/adamfopa.png"],
+  },
 };
 
 export default function RootLayout({
