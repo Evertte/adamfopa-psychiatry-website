@@ -63,7 +63,17 @@ export default function ServicesPage() {
         </div>
 
         <div className="mt-8 grid gap-6 md:grid-cols-[1.1fr_0.9fr] md:items-stretch">
-          <div className="flex h-full flex-col gap-5 rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
+          <div className="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm md:order-1">
+            <Image
+              src="/service.png"
+              alt="Care approach"
+              width={900}
+              height={700}
+              className="h-[360px] w-full object-cover md:h-[460px]"
+            />
+          </div>
+
+          <div className="flex h-full flex-col gap-5 rounded-3xl border border-slate-200 bg-white p-6 shadow-sm md:order-2">
             <div>
               <p className="text-sm font-semibold text-slate-900">Approach</p>
               <p className="mt-3 text-sm leading-relaxed text-slate-700">
@@ -118,16 +128,6 @@ export default function ServicesPage() {
                 </Link>
               </div>
             </div>
-          </div>
-
-          <div className="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm">
-            <Image
-              src="/service.png"
-              alt="Care approach"
-              width={900}
-              height={700}
-              className="h-[360px] w-full object-cover md:h-[460px]"
-            />
           </div>
         </div>
 
