@@ -35,10 +35,13 @@ export default function SiteHeader() {
 
   return (
     <header className="sticky top-0 z-50 border-b border-slate-200 bg-white/80 backdrop-blur relative">
-      <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-        <Link href="/" className="text-sm font-semibold text-slate-900">
-            Adamfopa Psychiatry, PLLC
-          </Link>
+      <div className="mx-auto flex max-w-6xl items-center justify-between gap-3 px-6 py-4">
+        <Link
+          href="/"
+          className="max-w-[200px] text-xs font-semibold leading-tight text-slate-900 md:text-sm"
+        >
+          Adamfopa Outpatient Psychiatry, PLLC
+        </Link>
 
         {/* Desktop nav */}
         <nav className="hidden items-center gap-6 text-sm text-slate-600 md:flex">
