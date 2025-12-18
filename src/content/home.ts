@@ -4,7 +4,7 @@ export const heroContent = {
   subtitle:
     "Telehealth and in-person visits with a collaborative, patient-first approach. Together we’ll design a plan that fits your goals and pace.",
   primaryCta: { label: "Request an appointment", href: "/contact" },
-  secondaryCta: { label: "Call the practice", href: "tel:+15085551234" },
+  secondaryCta: { label: "Call the practice", href: "tel:+19786483935" },
   stats: [
     { label: "Visit options", value: "Telehealth &   in-person" },
     { label: "Licensed in", value: "MA & NH" },

@@ -1,22 +1,28 @@
 import { Banknote, CreditCard, FileText, Shield } from "lucide-react";
 import Link from "next/link";
 
-const insurance = [
-  "Out-of-network: superbills available upon request",
-  "We can review insurance and payment options before scheduling",
-  "Telehealth availability depends on licensure (MA & NH)",
-];
-
 const selfPay = [
-  { label: "Initial evaluation", value: "$300–$350" },
-  { label: "Follow-up (med management)", value: "$150–$200" },
-  { label: "Consultation / second opinion", value: "$250–$300" },
+  { label: "Initial evaluation", href: "/contact" },
+  { label: "Follow-up (med management)", href: "/contact" },
+  { label: "Consultation / second opinion", href: "/contact" },
 ];
 
 const payments = [
-  "Credit/debit cards",
-  "HSA/FSA cards",
-  "Payment due at time of service",
+  "ACH bank transfer",
+  "Check",
+  "PayPal",
+  "Venmo",
+];
+
+const acceptedInsurers = [
+  "Aetna",
+  "Carelon Behavioral Health",
+  "Cigna and Evernorth",
+  "Optum",
+  "Oscar Health",
+  "Oxford",
+  "Quest Behavior health",
+  "Tufts",
 ];
 
 export default function FeesAndInsurancePage() {
@@ -39,21 +45,26 @@ export default function FeesAndInsurancePage() {
           <div className="flex h-full flex-col gap-3 rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
             <div className="flex items-center gap-2 text-sm font-semibold text-slate-900">
               <Shield className="h-5 w-5 text-teal-700" />
-              Insurance &amp; superbills
+              Insurance accepted
             </div>
-            <ul className="space-y-2 text-sm text-slate-700">
-              {insurance.map((item) => (
-                <li key={item} className="flex gap-2">
-                  <span className="mt-2 h-1.5 w-1.5 rounded-full bg-teal-200" />
-                  <span>{item}</span>
-                </li>
+            <div className="grid gap-2 md:grid-cols-2">
+              {acceptedInsurers.map((name) => (
+                <span
+                  key={name}
+                  className="rounded-2xl bg-slate-50 px-4 py-2 text-sm font-semibold text-slate-800 ring-1 ring-slate-200"
+                >
+                  {name}
+                </span>
               ))}
-            </ul>
+            </div>
+            <p className="text-sm text-slate-700">
+              If your insurance isn&apos;t listed, don&apos;t worry—contact the provider to verify.
+            </p>
             <Link
               href="/contact"
               className="mt-auto inline-flex w-fit items-center gap-2 text-sm font-semibold text-teal-700 hover-link-underline"
             >
-              Discuss your insurance →
+              Verify your insurance →
             </Link>
           </div>
 
@@ -71,9 +82,12 @@ export default function FeesAndInsurancePage() {
                   <span className="font-semibold text-slate-900">
                     {item.label}
                   </span>
-                  <span className="text-sm font-semibold text-slate-700">
-                    {item.value}
-                  </span>
+                  <Link
+                    href={item.href}
+                    className="text-sm font-semibold text-teal-700 hover-link-underline"
+                  >
+                    See provider →
+                  </Link>
                 </div>
               ))}
               <p className="text-xs text-slate-600">
@@ -97,22 +111,28 @@ export default function FeesAndInsurancePage() {
                 </li>
               ))}
             </ul>
+            <p className="text-xs text-slate-600">
+              Payment is verified and confirmed by the provider before scheduling.
+            </p>
           </div>
 
           <div className="flex h-full flex-col gap-3 rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
             <div className="flex items-center gap-2 text-sm font-semibold text-slate-900">
               <Banknote className="h-5 w-5 text-teal-700" />
-              Need a receipt?
+              Finances
             </div>
             <p className="text-sm text-slate-700">
-              We provide receipts and superbills upon request for out-of-network reimbursement and HSA/FSA documentation.
+              Fees are reviewed with you ahead of time. Sliding scale may be available; ask to see if you are eligible.
             </p>
             <Link
               href="/contact"
               className="inline-flex w-fit items-center gap-2 text-sm font-semibold text-teal-700 hover-link-underline"
             >
-              Request a superbill →
+              Apply for sliding scale →
             </Link>
+            <p className="text-xs text-slate-600">
+              We provide receipts and superbills upon request for out-of-network reimbursement and HSA/FSA documentation.
+            </p>
           </div>
         </div>
       </section>

@@ -46,8 +46,13 @@ export default function SiteFooter() {
           <div className="space-y-3">
             <p className="text-sm font-semibold">Contact</p>
             <div className="text-sm text-slate-700">
-              <p>(508) 555-1234</p>
-              <p>info@adamfopa.com</p>
+              <p>(978) 648-3935</p>
+              <Link
+                href="mailto:adamfopapsychiatry@gmail.com"
+                className="hover-link-underline hover:text-teal-700"
+              >
+                adamfopapsychiatry@gmail.com
+              </Link>
               <p className="mt-2">Leominster, MA</p>
               <p>Licensed in MA &amp; NH</p>
             </div>

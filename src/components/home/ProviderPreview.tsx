@@ -20,7 +20,7 @@ export default function ProviderPreview() {
             alt="Provider portrait."
             width={720}
             height={900}
-            className="h-[420px] w-full object-cover object-[50%_20%] md:h-[520px] lg:h-[560px]"
+            className="h-[480px] w-full object-cover object-center md:h-[560px] lg:h-[600px]"
           />
           <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-950/55 via-slate-950/20 to-transparent p-5">
             <div className="flex flex-wrap items-center gap-2 text-xs font-semibold text-white">
@@ -40,10 +40,10 @@ export default function ProviderPreview() {
               Provider
             </p>
             <h3 className="text-3xl font-semibold text-slate-900">
-              Edmund Adem, MD
+              Edmund Adem, MSN, RN, PMHNP-BC
             </h3>
             <p className="text-base text-slate-600">
-              Outpatient psychiatry with a calm, collaborative approach to medication management.
+              I am a Psychiatric Nurse Practitioner-BC offering a combination of diverse clinical experience, academic excellence, leadership, compassion, teamwork, collaboration, and strong interpersonal skills. Committed to providing quality, culturally competent, and evidence-based care to assist patients attain optimal outcomes.
             </p>
           </div>
 

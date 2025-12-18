@@ -30,6 +30,17 @@ export default async function ContactPage({
             <p className="max-w-3xl text-base text-slate-600">
               Telehealth and in-person options. Average response is typically within one business day.
             </p>
+            <div className="flex flex-col gap-2 sm:flex-row sm:items-center">
+              <a
+                href="tel:+19786483935"
+                className="inline-flex items-center justify-center rounded-full bg-teal-500 px-5 py-3 text-sm font-semibold text-slate-950 hover-lift hover-glow-invert transition hover:bg-teal-400 focus:outline-none focus:ring-4 focus:ring-teal-200"
+              >
+                Call the practice
+              </a>
+              <span className="text-xs text-slate-600">
+                Prefer to talk? Call for quick scheduling questions or book via the form below if you prefer email.
+              </span>
+            </div>
           </div>
 
           <div className="mt-6 flex flex-wrap gap-2 text-xs font-semibold text-slate-700">
