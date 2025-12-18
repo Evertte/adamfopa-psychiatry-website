@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import SiteHeader from "@/components/site/SiteHeader";
 import SiteFooter from "@/components/site/SiteFooter";
+import SWRegister from "@/components/site/SWRegister";
 
 export const metadata: Metadata = {
   title: "Adamfopa Outpatient Psychiatry, PLLC",
@@ -11,6 +12,8 @@ export const metadata: Metadata = {
     icon: "/favicon.svg",
     shortcut: "/favicon.svg",
   },
+  manifest: "/manifest.webmanifest",
+  themeColor: "#0f172a",
   openGraph: {
     title: "Adamfopa Outpatient Psychiatry, PLLC",
     description:
@@ -39,6 +42,7 @@ export default function RootLayout({
         <SiteHeader />
         {children}
         <SiteFooter />
+        <SWRegister />
       </body>
     </html>
   );
