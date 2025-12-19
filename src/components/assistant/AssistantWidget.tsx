@@ -51,7 +51,11 @@ export default function AssistantWidget() {
   }, []);
 
   useEffect(() => {
-    if (open) {
+    if (!open) return;
+    const shouldFocus =
+      typeof window !== "undefined" &&
+      window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+    if (shouldFocus) {
       inputRef.current?.focus();
     }
   }, [open]);
@@ -304,7 +308,11 @@ export default function AssistantWidget() {
         </div>
       )}
 
-      <div className="fixed bottom-4 right-4 z-[70] md:bottom-6 md:right-6">
+      <div
+        className={`fixed bottom-4 right-4 z-[70] md:bottom-6 md:right-6 ${
+          open && isFullscreen ? "hidden" : ""
+        }`}
+      >
         <button
           type="button"
           onClick={toggleOpen}
