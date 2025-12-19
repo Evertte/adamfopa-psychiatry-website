@@ -254,7 +254,7 @@ export default function AssistantWidget() {
                   rows={1}
                   placeholder="Type your message..."
                   aria-label="Message"
-                  className="flex-1 resize-none bg-transparent text-sm text-slate-700 placeholder:text-slate-400 outline-none"
+                  className="flex-1 resize-none bg-transparent text-base text-slate-700 placeholder:text-slate-400 outline-none sm:text-sm"
                   disabled={loading}
                 />
                 <button
