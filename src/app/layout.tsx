@@ -4,6 +4,7 @@ import "./globals.css";
 import SiteHeader from "@/components/site/SiteHeader";
 import SiteFooter from "@/components/site/SiteFooter";
 import SWRegister from "@/components/site/SWRegister";
+import AssistantWidgetClient from "@/components/assistant/AssistantWidgetClient";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://adamfopa-psychiatry-website.vercel.app"),
@@ -111,6 +112,7 @@ export default function RootLayout({
         <SiteHeader />
         {children}
         <SiteFooter />
+        <AssistantWidgetClient />
         <SWRegister />
       </body>
     </html>

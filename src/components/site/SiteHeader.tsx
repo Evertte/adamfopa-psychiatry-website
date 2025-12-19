@@ -19,10 +19,11 @@ export default function SiteHeader() {
   const [mounted, setMounted] = useState(false);
   const [open, setOpen] = useState(false);
 
-  // Wait for client to avoid hydration class mismatches on first paint
+  /* eslint-disable react-hooks/set-state-in-effect */
   useEffect(() => {
     setMounted(true);
   }, []);
+  /* eslint-enable react-hooks/set-state-in-effect */
 
   // Close menu on Escape
   useEffect(() => {
@@ -53,11 +54,11 @@ export default function SiteHeader() {
 
         {/* Desktop nav */}
         <nav className="hidden items-center gap-6 text-sm text-slate-600 md:flex">
-          {LINKS.map((l) => {
-            const isActive =
-              mounted &&
-              (pathname === l.href ||
-                (l.href !== "/" && pathname?.startsWith(l.href)));
+            {LINKS.map((l) => {
+              const isActive =
+                mounted &&
+                (pathname === l.href ||
+                  (l.href !== "/" && pathname?.startsWith(l.href)));
             return (
               <Link
                 key={l.href}
