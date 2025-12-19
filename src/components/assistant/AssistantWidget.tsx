@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState, useCallback } from "react";
-import { Loader2, MessageCircle, Send, Sparkles, X } from "lucide-react";
+import { Loader2, Maximize2, MessageCircle, Minimize2, Send, Sparkles, X } from "lucide-react";
 
 type Source = { title: string; slug: string };
 
@@ -23,6 +23,7 @@ const suggestions: { label: string; prompt: string }[] = [
 
 export default function AssistantWidget() {
   const [open, setOpen] = useState(false);
+  const [isFullscreen, setIsFullscreen] = useState(false);
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [loading, setLoading] = useState(false);
@@ -30,7 +31,24 @@ export default function AssistantWidget() {
   const bottomRef = useRef<HTMLDivElement | null>(null);
   const inputRef = useRef<HTMLTextAreaElement | null>(null);
 
-  const toggleOpen = useCallback(() => setOpen((v) => !v), []);
+  const toggleOpen = useCallback(() => {
+    setOpen((v) => {
+      const next = !v;
+      if (!next) {
+        setIsFullscreen(false);
+      }
+      return next;
+    });
+  }, []);
+
+  const handleClose = useCallback(() => {
+    setOpen(false);
+    setIsFullscreen(false);
+  }, []);
+
+  const toggleFullscreen = useCallback(() => {
+    setIsFullscreen((v) => !v);
+  }, []);
 
   useEffect(() => {
     if (open) {
@@ -42,12 +60,12 @@ export default function AssistantWidget() {
     if (!open) return;
     const handler = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
-        setOpen(false);
+        handleClose();
       }
     };
     document.addEventListener("keydown", handler);
     return () => document.removeEventListener("keydown", handler);
-  }, [open, setOpen]);
+  }, [open, handleClose]);
 
   useEffect(() => {
     if (!open) return;
@@ -125,7 +143,11 @@ export default function AssistantWidget() {
         <div
           role="dialog"
           aria-modal="true"
-          className="fixed bottom-20 right-4 left-auto z-[70] flex h-[520px] max-h-[80vh] w-[340px] max-w-[92vw] flex-col overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-2xl transition-all motion-reduce:transition-none md:bottom-24 md:right-6 md:w-[380px]"
+          className={`fixed z-[70] flex flex-col overflow-hidden bg-white shadow-2xl transition-all motion-reduce:transition-none ${
+            isFullscreen
+              ? "inset-0 rounded-none"
+              : "bottom-20 right-4 left-auto h-[520px] max-h-[80vh] w-[340px] max-w-[92vw] rounded-3xl border border-slate-200 md:bottom-24 md:right-6 md:w-[380px]"
+          }`}
           onWheelCapture={(e) => e.stopPropagation()}
         >
           <div className="flex shrink-0 items-center justify-between bg-teal-500 px-5 py-4 text-white">
@@ -137,14 +159,29 @@ export default function AssistantWidget() {
                 Online
               </span>
             </div>
-            <button
-              type="button"
-              onClick={() => setOpen(false)}
-              className="rounded-full p-2 text-white/90 transition hover:bg-teal-400 focus:outline-none focus:ring-2 focus:ring-white/60"
-              aria-label="Close"
-            >
-              <X className="h-5 w-5" aria-hidden />
-            </button>
+            <div className="flex items-center gap-2">
+              <button
+                type="button"
+                onClick={toggleFullscreen}
+                className="rounded-full p-2 text-white/90 transition hover:bg-teal-400 focus:outline-none focus:ring-2 focus:ring-white/60"
+                aria-label={isFullscreen ? "Exit full screen" : "View full screen"}
+                aria-pressed={isFullscreen}
+              >
+                {isFullscreen ? (
+                  <Minimize2 className="h-5 w-5" aria-hidden />
+                ) : (
+                  <Maximize2 className="h-5 w-5" aria-hidden />
+                )}
+              </button>
+              <button
+                type="button"
+                onClick={handleClose}
+                className="rounded-full p-2 text-white/90 transition hover:bg-teal-400 focus:outline-none focus:ring-2 focus:ring-white/60"
+                aria-label="Close"
+              >
+                <X className="h-5 w-5" aria-hidden />
+              </button>
+            </div>
           </div>
 
           <div className="flex min-h-0 min-w-0 flex-1 flex-col bg-white">
