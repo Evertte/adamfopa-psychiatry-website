@@ -149,7 +149,7 @@ export default function AboutPage() {
             </p>
             <div className="rounded-2xl bg-slate-50 px-4 py-3 text-sm text-slate-700 ring-1 ring-slate-200">
               <MapPin className="mr-2 inline-block h-4 w-4 text-teal-700" />
-              In-person: Leominster, MA • Telehealth: MA &amp; NH
+              In-person: 1097 Central Street, Leominster, MA • Telehealth: MA &amp; NH
             </div>
           </div>
 

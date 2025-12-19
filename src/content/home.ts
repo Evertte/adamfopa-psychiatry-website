@@ -28,7 +28,7 @@ export const visitOptions = [
     title: "In-person",
     desc: "Office visits in a calm setting for those who prefer face-to-face conversations.",
     bullets: [
-      "Leominster, MA office",
+      "1097 Central Street, Leominster, MA",
       "Convenient to Worcester area",
       "Accessible building",
     ],

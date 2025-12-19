@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 const LINKS = [
   { href: "/", label: "Home" },
@@ -14,7 +15,14 @@ const LINKS = [
 ];
 
 export default function SiteHeader() {
+  const pathname = usePathname();
+  const [mounted, setMounted] = useState(false);
   const [open, setOpen] = useState(false);
+
+  // Wait for client to avoid hydration class mismatches on first paint
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   // Close menu on Escape
   useEffect(() => {
@@ -45,15 +53,26 @@ export default function SiteHeader() {
 
         {/* Desktop nav */}
         <nav className="hidden items-center gap-6 text-sm text-slate-600 md:flex">
-          {LINKS.map((l) => (
-            <Link
-              key={l.href}
-              className="hover-link-underline hover-glow hover:text-slate-900"
-              href={l.href}
-            >
-              {l.label}
-            </Link>
-          ))}
+          {LINKS.map((l) => {
+            const isActive =
+              mounted &&
+              (pathname === l.href ||
+                (l.href !== "/" && pathname?.startsWith(l.href)));
+            return (
+              <Link
+                key={l.href}
+                className={[
+                  "relative pb-1 font-medium border-b-2 border-transparent transition-colors hover-link-underline hover-glow hover:text-slate-900 hover:border-teal-200",
+                  isActive
+                    ? "text-slate-900 border-teal-600"
+                    : "text-slate-600",
+                ].join(" ")}
+                href={l.href}
+              >
+                {l.label}
+              </Link>
+            );
+          })}
         </nav>
 
         {/* Desktop CTA */}
@@ -115,16 +134,27 @@ export default function SiteHeader() {
         >
           <div className="mx-auto max-w-6xl px-6 py-4">
             <nav className="flex flex-col gap-2">
-              {LINKS.map((l) => (
-                <Link
-                  key={l.href}
-                  href={l.href}
-                  onClick={() => setOpen(false)}
-                  className="rounded-xl px-3 py-2 text-sm font-semibold text-slate-900 hover-glow transition hover:bg-slate-50 focus:outline-none focus:ring-4 focus:ring-teal-100"
-                >
-                  {l.label}
-                </Link>
-              ))}
+              {LINKS.map((l) => {
+                const isActive =
+                  mounted &&
+                  (pathname === l.href ||
+                    (l.href !== "/" && pathname?.startsWith(l.href)));
+                return (
+                  <Link
+                    key={l.href}
+                    href={l.href}
+                    onClick={() => setOpen(false)}
+                    className={[
+                      "rounded-xl px-3 py-2 text-sm font-semibold transition hover:bg-slate-50 hover-glow focus:outline-none focus:ring-4 focus:ring-teal-100",
+                      isActive
+                        ? "bg-slate-100 text-slate-900 ring-1 ring-teal-100"
+                        : "text-slate-900",
+                    ].join(" ")}
+                  >
+                    {l.label}
+                  </Link>
+                );
+              })}
             </nav>
 
             <div className="mt-4 grid gap-2">

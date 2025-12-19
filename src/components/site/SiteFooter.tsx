@@ -53,7 +53,8 @@ export default function SiteFooter() {
               >
                 adamfopapsychiatry@gmail.com
               </Link>
-              <p className="mt-2">Leominster, MA</p>
+              <p className="mt-2">1097 Central Street</p>
+              <p>Leominster, MA</p>
               <p>Licensed in MA &amp; NH</p>
             </div>
           </div>

@@ -14,7 +14,7 @@ export default async function ContactPage({
         ? "inperson"
         : "";
   const mapSrc =
-    "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2948.812316774817!2d-71.75979422371341!3d42.52509082634845!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89e3e6d9f406edb9%3A0x6138be05c3aab778!2sLeominster%2C%20MA!5e0!3m2!1sen!2sus!4v1700000000000!5m2!1sen!2sus";
+    "https://www.google.com/maps?q=1097+Central+Street+Leominster+MA&output=embed";
 
   return (
     <main className="min-h-screen bg-slate-50 text-slate-900">
@@ -71,11 +71,11 @@ export default async function ContactPage({
             Office location (in-person visits)
           </p>
           <p className="mt-1 text-sm text-slate-600">
-            Leominster, MA. Exact details are provided after scheduling.
+            1097 Central Street, Leominster, MA. Telehealth available across MA &amp; NH.
           </p>
           <div className="mt-4 overflow-hidden rounded-xl border border-slate-200">
             <iframe
-              title="Leominster office map"
+              title="1097 Central Street, Leominster, MA office map"
               src={mapSrc}
               width="100%"
               height="320"

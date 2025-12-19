@@ -61,6 +61,7 @@ export default function RootLayout({
               email: "adamfopapsychiatry@gmail.com",
               address: {
                 "@type": "PostalAddress",
+                streetAddress: "1097 Central Street",
                 addressLocality: "Leominster",
                 addressRegion: "MA",
                 addressCountry: "US",
