@@ -12,11 +12,13 @@ type ChatMessage = {
 };
 
 const suggestions: { label: string; prompt: string }[] = [
-  { label: "Fees & Insurance", prompt: "What insurance do you accept and how do payments work?" },
-  { label: "New patient steps", prompt: "How do new patients get started?" },
-  { label: "Telehealth vs in-person", prompt: "When can I choose telehealth vs in-person visits?" },
-  { label: "Cancellation policy", prompt: "What is your cancellation policy?" },
+  { label: "Fees & Insurance", prompt: "Insurance & payment options?" },
+  { label: "New patient steps", prompt: "How do new patients start?" },
+  { label: "Telehealth vs in-person", prompt: "Telehealth vs in-person options?" },
+  { label: "Cancellation policy", prompt: "Cancellation policy?" },
   { label: "Request appointment", prompt: "How do I request an appointment?" },
+  { label: "Medication refills", prompt: "Medication refills between visits?" },
+  { label: "Scheduling", prompt: "How far out are new appointments?" },
 ];
 
 export default function AssistantWidget() {
@@ -115,66 +117,55 @@ export default function AssistantWidget() {
     void handleSend(prompt);
   };
 
+  const showSuggestions =
+    !loading &&
+    (messages.length === 0 ||
+      messages[messages.length - 1]?.role === "assistant" ||
+      Boolean(error));
+
   return (
     <>
       {open && (
         <div
           role="dialog"
           aria-modal="true"
-          className="fixed bottom-20 right-4 left-auto z-[70] flex h-[460px] w-[340px] max-w-[92vw] flex-col overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-2xl transition-all motion-reduce:transition-none md:bottom-24 md:right-6 md:w-[380px]"
+          className="fixed bottom-20 right-4 left-auto z-[70] flex h-[520px] max-h-[80vh] w-[340px] max-w-[92vw] flex-col overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-2xl transition-all motion-reduce:transition-none md:bottom-24 md:right-6 md:w-[380px]"
           onWheelCapture={(e) => e.stopPropagation()}
         >
-          <div className="flex items-start gap-3 border-b border-slate-100 bg-white/95 px-4 py-3 backdrop-blur">
-            <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-teal-50 text-teal-700 ring-1 ring-teal-100">
+          <div className="flex shrink-0 items-center justify-between bg-teal-500 px-5 py-4 text-white">
+            <div className="flex items-center gap-3 text-base font-semibold">
               <Sparkles className="h-5 w-5" aria-hidden />
-            </div>
-            <div className="flex-1 space-y-1">
-              <div className="flex items-center gap-2">
-                <p className="text-sm font-semibold text-slate-900">
-                  Practice Info Assistant
-                </p>
-                <span className="h-2 w-2 rounded-full bg-teal-400" />
-                <span className="text-[11px] font-semibold uppercase tracking-wide text-slate-500">
-                  Online
-                </span>
-              </div>
-              <p className="text-xs text-slate-600">
-                General practice information only. Not for emergencies.
-              </p>
+              <span>Info Assistant</span>
+              <span className="inline-flex items-center gap-1.5 rounded-full bg-white/15 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-white/90 ring-1 ring-white/20">
+                <span className="h-2 w-2 rounded-full bg-emerald-300 shadow-[0_0_8px_rgba(52,211,153,0.8)]" />
+                Online
+              </span>
             </div>
             <button
               type="button"
               onClick={() => setOpen(false)}
-              className="rounded-full p-2 text-slate-500 transition hover:bg-slate-100 hover:text-slate-900 focus:outline-none focus:ring-2 focus:ring-teal-200"
+              className="rounded-full p-2 text-white/90 transition hover:bg-teal-400 focus:outline-none focus:ring-2 focus:ring-white/60"
               aria-label="Close"
             >
-              <X className="h-4 w-4" aria-hidden />
+              <X className="h-5 w-5" aria-hidden />
             </button>
           </div>
 
-          <div className="flex h-full min-w-0 flex-col gap-3 px-4 py-3">
-            <div className="flex min-w-0 flex-wrap gap-2">
-              {suggestions.map((chip) => (
-                <button
-                  key={chip.prompt}
-                  type="button"
-                  onClick={() => handleSuggestion(chip.prompt)}
-                  className="rounded-full border border-slate-200 bg-white px-3 py-1.5 text-[11px] font-semibold text-slate-700 shadow-sm transition hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-teal-200 motion-reduce:transition-none"
-                >
-                  {chip.label}
-                </button>
-              ))}
-            </div>
-
+          <div className="flex min-h-0 min-w-0 flex-1 flex-col bg-white">
             <div
-              className="flex min-h-0 min-w-0 flex-1 flex-col gap-3 overflow-y-auto overscroll-contain rounded-2xl bg-slate-50 px-3 py-4 ring-1 ring-slate-200"
+              className="flex min-h-0 flex-1 flex-col gap-4 overflow-y-auto px-5 py-4"
               onWheelCapture={(e) => e.stopPropagation()}
               aria-live="polite"
             >
               {messages.length === 0 && (
-                <div className="rounded-xl border border-dashed border-slate-200 bg-white px-4 py-3 text-sm text-slate-600">
-                  Ask about fees, insurance, telehealth, scheduling, or policies. For emergencies, call 911 or 988.
-                </div>
+                <>
+                  <p className="text-base font-medium text-slate-600">
+                    👋 Hi! How can we help today?
+                  </p>
+                  <p className="text-xs text-slate-500">
+                    General info only. Not for emergencies.
+                  </p>
+                </>
               )}
 
               {messages.map((msg, idx) => (
@@ -216,39 +207,60 @@ export default function AssistantWidget() {
                   </div>
                 </div>
               )}
+
+              {showSuggestions && (
+                <div className="flex flex-wrap gap-2">
+                  {suggestions.map((chip) => (
+                    <button
+                      key={chip.prompt}
+                      type="button"
+                      onClick={() => handleSuggestion(chip.prompt)}
+                      className="rounded-full border border-slate-300 bg-white px-4 py-2 text-xs font-medium text-slate-700 transition hover:border-slate-400 hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-teal-200 motion-reduce:transition-none"
+                    >
+                      {chip.prompt}
+                    </button>
+                  ))}
+                </div>
+              )}
               <div ref={bottomRef} />
             </div>
 
             {error ? (
-              <div className="rounded-xl bg-red-50 px-3 py-2 text-xs text-red-700 ring-1 ring-red-200">
-                {error}
+              <div className="px-5 pb-2">
+                <div className="rounded-xl bg-red-50 px-3 py-2 text-xs text-red-700 ring-1 ring-red-200">
+                  {error}
+                </div>
               </div>
             ) : null}
 
             <form
-              className="flex min-w-0 flex-col gap-2"
+              className="shrink-0 border-t border-slate-200 px-5 py-4"
               onSubmit={(e) => {
                 e.preventDefault();
                 void handleSend();
               }}
             >
-              <label className="text-xs font-semibold text-slate-600">
-                Ask a question
-              </label>
-              <div className="flex items-center gap-2 rounded-2xl border border-slate-200 bg-white px-3 py-2 shadow-sm focus-within:border-teal-300 focus-within:ring-2 focus-within:ring-teal-200">
+              <div className="flex items-center gap-2 rounded-2xl border border-slate-300 bg-white px-4 py-4 focus-within:border-teal-400 focus-within:ring-2 focus-within:ring-teal-200">
                 <textarea
                   ref={inputRef}
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" && !e.shiftKey) {
+                      e.preventDefault();
+                      void handleSend();
+                    }
+                  }}
                   rows={1}
                   placeholder="Type your message..."
-                  className="flex-1 resize-none bg-transparent text-sm text-slate-900 outline-none"
+                  aria-label="Message"
+                  className="flex-1 resize-none bg-transparent text-sm text-slate-700 placeholder:text-slate-400 outline-none"
                   disabled={loading}
                 />
                 <button
                   type="submit"
                   disabled={loading}
-                  className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-teal-500 text-white transition hover:bg-teal-400 focus:outline-none focus:ring-2 focus:ring-teal-200 disabled:cursor-not-allowed disabled:opacity-60"
+                  className="inline-flex h-9 w-9 items-center justify-center rounded-full text-slate-400 transition hover:text-teal-600 focus:outline-none focus:ring-2 focus:ring-teal-200 disabled:cursor-not-allowed disabled:opacity-50"
                 >
                   {loading ? <Loader2 className="h-4 w-4 animate-spin" aria-hidden /> : <Send className="h-4 w-4" aria-hidden />}
                   <span className="sr-only">Send</span>
