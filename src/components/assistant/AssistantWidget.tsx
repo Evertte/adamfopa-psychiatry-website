@@ -117,11 +117,7 @@ export default function AssistantWidget() {
     void handleSend(prompt);
   };
 
-  const showSuggestions =
-    !loading &&
-    (messages.length === 0 ||
-      messages[messages.length - 1]?.role === "assistant" ||
-      Boolean(error));
+  const showSuggestions = !loading && messages.length === 0;
 
   return (
     <>
